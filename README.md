@@ -1,31 +1,57 @@
-# PDFLean Skills
+# PDFLean MCP Server
 
-Agent skills that let an AI assistant work with PDFs through the PDFLean public API. Skills are thin wrappers: all processing happens through the API with your own API key, and usage is metered in API credits.
+Hosted remote MCP server that gives AI agents 17 PDF tools: validate, extract, merge, split, compress, OCR, sign and redact.
 
-## Skills in this repo
+- **Endpoint:** `https://mcp.pdflean.com/mcp` (Streamable HTTP, stateless)
+- **Authentication:** OAuth 2.1 (dynamic client registration + PKCE), scopes `pdflean:read` / `pdflean:write`
+- **Official MCP Registry:** `com.pdflean/mcp`
+- **Website:** https://pdflean.com
 
-### pdflean-pdf-toolkit
-General-purpose PDF operations: merge, split, compress, linearize, convert Office documents, OCR, validate PDF/A and PDF/UA, verify signatures, sign, redact, extract structured data, convert documents to Markdown/JSON (Docling), and scan for PII.
+## Connect
 
-### pdflean-contract-pipeline
-A three-step contract review pipeline: extract structured fields, scan for personal data, and optionally redact — with a JSON evidence report for every step.
+Any MCP client that supports remote Streamable HTTP servers can connect directly:
 
-## Requirements
+```json
+{
+  "mcpServers": {
+    "pdflean": {
+      "url": "https://mcp.pdflean.com/mcp"
+    }
+  }
+}
+```
 
-- A PDFLean API key (create one in your PDFLean account). Set it as an environment variable:
-  `export PDFLEAN_API_KEY=your_key_here`
-- Python 3 (standard library only, no extra packages).
+On first use the client opens the PDFLean OAuth consent page; sign in with a PDFLean account and approve access. Tool usage is metered in PDFLean API credits; status and usage tools are free.
 
-## Install
+## Tools
 
-Copy the skill folders into your agent's skills directory, for example:
+Read-only:
 
-- Claude Code: `~/.claude/skills/`
-- ZCode: `~/.zcode/skills/` or your workspace `.agents/skills/`
-- Other SKILL.md-compatible hosts: their documented skills folder.
+| Tool | Purpose |
+| --- | --- |
+| `pdf_validate_pdfa` | Validate a PDF against PDF/A |
+| `pdf_check_accessibility` | Check PDF/UA accessibility |
+| `pdf_verify_signature` | Verify digital signatures |
+| `pdf_extract_text` | Extract text and structured form/invoice fields |
+| `pdf_scan_pii` | Scan a document for personal data |
+| `ai_summarize` | Summarize a document |
+| `ai_translate` | Translate a document |
+| `job_status` | Check an async job (free) |
+| `credits_usage` | Check credit usage (free) |
+
+Write:
+
+| Tool | Purpose |
+| --- | --- |
+| `pdf_merge` | Merge multiple PDFs |
+| `pdf_split` | Split a PDF |
+| `pdf_compress` | Compress a PDF |
+| `pdf_convert_document` | Convert Office documents to/from PDF |
+| `pdf_ocr` | OCR scanned documents |
+| `pdf_sign` | Digitally sign a PDF |
+| `pdf_redact` | Redact sensitive content |
+| `workflow_run` | Run a saved PDFLean workflow |
 
 ## Notes
 
-- Files are sent to the API as base64; the API accepts files up to 8 MB per call.
-- Failed API jobs are not charged.
-- Website: https://pdflean.com — API documentation: https://pdflean.com/workflows/api
+This repository is the public listing for the hosted service: it contains the registry manifest (`server.json`) and client configuration examples. The server itself runs at the endpoint above; there is nothing to install or self-host.
