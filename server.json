@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.pdflean/mcp",
+  "title": "PDFLean",
+  "version": "1.0.0",
+  "websiteUrl": "https://pdflean.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.pdflean.com/mcp"
+    }
+  ],
+  "description": "PDF tools for AI agents: validate, extract, merge, split, compress, OCR, sign and redact."
+}
