@@ -1,6 +1,7 @@
 # PDFLean MCP Server
 
 [![TensorBlock MCP Index](https://mcp-index.tensorblock.co/v1/servers/github-epengwang-pdflean-mcp-c12575cb/badge.svg)](https://tensorblock.co/mcp/servers/github-epengwang-pdflean-mcp-c12575cb)
+[![PDFLean MCP Server on AI Agents Listing](https://aiagentslisting.com/pdflean-mcp-server/badge.svg?claim=acd17db8eec7a1ab8b9ec295327efb8c)](https://aiagentslisting.com/mcp/pdflean-mcp-server)
 
 Hosted remote MCP server that gives AI agents 17 PDF tools: validate, extract, merge, split, compress, OCR, sign and redact.
 
